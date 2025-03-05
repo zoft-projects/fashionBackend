@@ -3,6 +3,7 @@ import { validationResult, body } from "express-validator";
 import bcrypt from "bcrypt";
 import { userService } from "../../services";
 import users from "../../database/models/users/users";
+import { userRoleEnum } from "../../enum/userRoleEnum";
 
 export const validateRegister = [
   body("username").trim().notEmpty().withMessage("Username is required")
@@ -20,7 +21,7 @@ export const registerUser = async (req: Request, res: Response): Promise<void> =
     return;
   }
 
-  const { password, ...data } = req.body;
+  const { password, role, ...data } = req.body;
 
   try {
     const existingUser = await users.findOne({ email: data.email });
@@ -30,7 +31,7 @@ export const registerUser = async (req: Request, res: Response): Promise<void> =
     }
 
     const hashPsw = await bcrypt.hash(password, 10);
-    const newUser = await userService.registerUser({ ...data, password: hashPsw });
+    const newUser = await userService.registerUser({ ...data, password: hashPsw , role: role || userRoleEnum.user});
 
     
     res.status(201).json({ status: 201, message: "User created successfully", newUser: newUser });

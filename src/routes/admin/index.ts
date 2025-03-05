@@ -17,7 +17,7 @@ router.route('/delete_user/:_id').delete(authenticationMiddleware, identityMiddl
 
 router.route('/update_user/:_id').put(authenticationMiddleware, identityMiddleware("super-admin"), updateUser);
 
-router.route('/get_products').get(authenticationMiddleware,identityMiddleware("super-admin", "admin","field-staff"), getAllProducts);
+router.route('/get_products').get(authenticationMiddleware, getAllProducts);
 
 router.route('/get_products/:_id').get(authenticationMiddleware, getProductById);
 

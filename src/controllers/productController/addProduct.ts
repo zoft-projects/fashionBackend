@@ -4,12 +4,10 @@ import { productService } from "../../services";
 export const addProduct = async (req: Request, res: Response): Promise<void> => {
   try {
     const { name, brand, image, category, description, rating, price } = req.body;
-
-    const imageBuffer = Buffer.from(image.data, "base64");
     const imageObject = {
       fname: image.fname,
       type: image.type,
-      data: imageBuffer,
+      data: image.data, 
     };
 
     const productData = {
@@ -30,4 +28,3 @@ export const addProduct = async (req: Request, res: Response): Promise<void> => 
     res.status(500).json({ status: 500, message: "Failed to add product", error: error.message });
   }
 };
-

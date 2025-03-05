@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 type productImageSchemaType={
   fname: string;
   type: string;
-  data: Buffer;
+  data: string;
 };
 
 type productSchemaType={

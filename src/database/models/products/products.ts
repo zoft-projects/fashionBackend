@@ -1,11 +1,15 @@
 import mongoose, { Schema, Document } from 'mongoose';
 import { productSchemaType } from '../../../types/model_type/product_model_type';
 
-const productImageSchema = new Schema({
-  fname: { type: String, required: true },
-  type: { type: String, required: true },
-  data: { type: Buffer, required: true },
-});
+const productImageSchema = new Schema(
+  {
+    fname: { type: String, required: true },
+    type: { type: String, required: true },
+    data: { type: String, required: true },
+  },
+  { _id: false } 
+);
+
 
 const productSchema = new Schema<productSchemaType & Document>(
   {
