@@ -26,7 +26,9 @@ app.use(cors());
 
 connectToDB();
 import routes from './src/routes';
+import swaggerDocs from './src/swagger/swagger';
 routes(app);
+
 
 let cartCounts = new Map<string, number>();
 
@@ -52,7 +54,8 @@ io.on('connection', (socket) => {
     });
 });
 
-const PORT: number = parseInt(process.env.PORT || '8000', 10);
+const PORT: number = parseInt(process.env.PORT || '7000', 10);
+swaggerDocs(app,PORT)
 
 server.listen(PORT, () => {
     console.log(`Server started at ${PORT}`);
